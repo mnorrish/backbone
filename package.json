@@ -13,7 +13,7 @@
   ],
   "author": "Jeremy Ashkenas",
   "dependencies": {
-    "underscore": ">=1.8.3"
+    "lodash": "3.10.x"
   },
   "devDependencies": {
     "coffee-script": "1.7.1",

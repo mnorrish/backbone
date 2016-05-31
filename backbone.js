@@ -14,7 +14,7 @@
 
   // Set up Backbone appropriately for the environment. Start with AMD.
   if (typeof define === 'function' && define.amd) {
-    define(['underscore', 'jquery', 'exports'], function(_, $, exports) {
+    define(['lodash', 'jquery', 'exports'], function(_, $, exports) {
       // Export global even in AMD case in case this script is loaded with
       // others that may still expect a global Backbone.
       root.Backbone = factory(root, exports, _, $);
@@ -22,7 +22,7 @@
 
   // Next for Node.js or CommonJS. jQuery may not be needed as a module.
   } else if (typeof exports !== 'undefined') {
-    var _ = require('underscore'), $;
+    var _ = require('lodash'), $;
     try { $ = require('jquery'); } catch (e) {}
     factory(root, exports, _, $);
 
@@ -68,7 +68,7 @@
   // form param named `model`.
   Backbone.emulateJSON = false;
 
-  // Proxy Backbone class methods to Underscore functions, wrapping the model's
+  // Proxy Backbone class methods to Lodash functions, wrapping the model's
   // `attributes` object or collection's `models` array behind the scenes.
   //
   // collection.filter(function(model) { return model.get('age') > 10 });
@@ -96,7 +96,7 @@
       };
     }
   };
-  var addUnderscoreMethods = function(Class, methods, attribute) {
+  var addLodashMethods = function(Class, methods, attribute) {
     _.each(methods, function(length, method) {
       if (_[method]) Class.prototype[method] = addMethod(length, method, attribute);
     });
@@ -453,7 +453,7 @@
       return this.get(attr) != null;
     },
 
-    // Special-cased proxy to underscore's `_.matches` method.
+    // Special-cased proxy to lodash's `_.matches` method.
     matches: function(attrs) {
       return !!_.iteratee(attrs, this)(this.attributes);
     },
@@ -731,13 +731,13 @@
 
   });
 
-  // Underscore methods that we want to implement on the Model, mapped to the
+  // Lodash methods that we want to implement on the Model, mapped to the
   // number of arguments they take.
   var modelMethods = {keys: 1, values: 1, pairs: 1, invert: 1, pick: 0,
       omit: 0, chain: 1, isEmpty: 1};
 
-  // Mix in each Underscore method as a proxy to `Model#attributes`.
-  addUnderscoreMethods(Model, modelMethods, 'attributes');
+  // Mix in each Lodash method as a proxy to `Model#attributes`.
+  addLodashMethods(Model, modelMethods, 'attributes');
 
   // Backbone.Collection
   // -------------------
@@ -1189,7 +1189,7 @@
 
   });
 
-  // Underscore methods that we want to implement on the Collection.
+  // Lodash methods that we want to implement on the Collection.
   // 90% of the core usefulness of Backbone Collections is actually implemented
   // right here:
   var collectionMethods = {forEach: 3, each: 3, map: 3, collect: 3, reduce: 0,
@@ -1201,8 +1201,8 @@
       isEmpty: 1, chain: 1, sample: 3, partition: 3, groupBy: 3, countBy: 3,
       sortBy: 3, indexBy: 3, findIndex: 3, findLastIndex: 3};
 
-  // Mix in each Underscore method as a proxy to `Collection#models`.
-  addUnderscoreMethods(Collection, collectionMethods, 'models');
+  // Mix in each Lodash method as a proxy to `Collection#models`.
+  addLodashMethods(Collection, collectionMethods, 'models');
 
   // Backbone.View
   // -------------

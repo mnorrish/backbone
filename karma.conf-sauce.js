@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 
 // Browsers to run on Sauce Labs platforms
 var sauceBrowsers = _.reduce([
@@ -30,7 +30,7 @@ var sauceBrowsers = _.reduce([
 
   // 4.3 currently erros with some router tests
   // ['android', '4.3'],
-  
+
   ['android', '4.0'],
 
   ['safari', '8.0', 'OS X 10.10'],
@@ -68,7 +68,7 @@ module.exports = function(config) {
     files: [
         'test/vendor/jquery.js',
         'test/vendor/json2.js',
-        'test/vendor/underscore.js',
+        'test/vendor/lodash.js',
         'backbone.js',
         'test/setup/*.js',
         'test/*.js'

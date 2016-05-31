@@ -686,7 +686,7 @@
     assert.equal(coll.findWhere({a: 4}), void 0);
   });
 
-  QUnit.test('Underscore methods', function(assert) {
+  QUnit.test('Lodash methods', function(assert) {
     assert.expect(21);
     assert.equal(col.map(function(model){ return model.get('label'); }).join(' '), 'a b c d');
     assert.equal(col.some(function(model){ return model.id === 100; }), false);
@@ -719,7 +719,7 @@
     assert.ok(col.indexBy('id')[first.id] === first);
   });
 
-  QUnit.test('Underscore methods with object-style and property-style iteratee', function(assert) {
+  QUnit.test('Lodash methods with object-style and property-style iteratee', function(assert) {
     assert.expect(26);
     var model = new Backbone.Model({a: 4, b: 1, e: 3});
     var coll = new Backbone.Collection([
